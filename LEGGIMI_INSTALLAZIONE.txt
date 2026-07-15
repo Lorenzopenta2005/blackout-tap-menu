@@ -1,0 +1,135 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║                   BLACKOUT PUB - SISTEMA SPINE                        ║
+║                    Guida Installazione PC Pub                         ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+📦 COSA SERVE (Una volta sola)
+═══════════════════════════════════════════════════════════════════════
+
+1. Node.js (Software gratuito Microsoft/Google/Apple)
+   → Doppio click su: INSTALLA_NODEJS.bat
+   → Oppure scarica da: https://nodejs.org (versione LTS)
+
+2. Questa cartella "MBL" copiata sul PC del pub
+
+
+🚀 PRIMO AVVIO (Setup Iniziale)
+═══════════════════════════════════════════════════════════════════════
+
+1. Copia tutta la cartella "MBL" sul Desktop del PC pub
+
+2. Doppio click su: START_SERVER.bat
+   → La prima volta installerà le dipendenze (1-2 minuti)
+   → Aspetta che dica "Server in esecuzione!"
+
+3. FATTO! Il sistema è pronto
+
+
+📱 USO QUOTIDIANO (Ogni giorno)
+═══════════════════════════════════════════════════════════════════════
+
+MATTINA (Apertura Pub):
+  1. Doppio click su: START_SERVER.bat
+  2. Lascia la finestra nera aperta (è il server)
+  
+GESTIONE SPINE (Quando cambi fusto):
+  1. Doppio click su: OPEN_ADMIN.bat
+  2. Login con password: admin123
+  3. Cambia la birra
+  4. Chiudi il browser
+  
+MENU CLIENTI (Mostra ai clienti):
+  1. Doppio click su: OPEN_CLIENT.bat
+  2. Metti il browser a schermo intero (F11)
+  3. Opzionale: crea QR code per smartphone clienti
+
+SERA (Chiusura Pub):
+  1. Doppio click su: STOP_SERVER.bat
+  2. Oppure: chiudi la finestra nera del server
+
+
+🔧 IMPOSTAZIONI
+═══════════════════════════════════════════════════════════════════════
+
+Cambiare Password Admin:
+  1. Apri con Notepad: .env
+  2. Cambia: ADMIN_PASSWORD=admin123
+  3. Salva
+  4. Riavvia server
+
+Aggiungere Birre al Catalogo:
+  1. Apri con Notepad: server.js
+  2. Cerca: catalogoBirre
+  3. Copia l'ultima birra e modifica i dati
+  4. Salva
+  5. Riavvia server
+
+
+📊 ACCESSO DA ALTRI DISPOSITIVI
+═══════════════════════════════════════════════════════════════════════
+
+Per tablet/smartphone sulla stessa WiFi:
+
+1. Trova IP del PC:
+   → Apri CMD (Prompt dei comandi)
+   → Digita: ipconfig
+   → Cerca "Indirizzo IPv4" (es. 192.168.1.100)
+
+2. Su tablet/smartphone:
+   → Admin:   http://192.168.1.100:3000/admin.html
+   → Cliente: http://192.168.1.100:3000/cliente.html
+
+3. Genera QR Code:
+   → Vai su: https://www.qr-code-generator.com
+   → Incolla URL cliente
+   → Stampa e appendi nei tavoli
+
+
+❓ PROBLEMI COMUNI
+═══════════════════════════════════════════════════════════════════════
+
+"Node.js non installato!"
+  → Installa Node.js (INSTALLA_NODEJS.bat)
+  → Riavvia il PC
+
+"Porta già in uso"
+  → Un altro programma usa porta 3000
+  → Ferma altri server o cambia porta in .env
+
+"Cannot GET /"
+  → Aggiungi /cliente.html o /admin.html all'URL
+
+Pagina non si carica:
+  → Controlla che START_SERVER.bat sia aperto
+  → Guarda la finestra nera per errori
+
+
+📞 CONTATTI SUPPORTO
+═══════════════════════════════════════════════════════════════════════
+
+Sistema sviluppato per BlackOut Pub Carpi
+
+Tutto il codice è in:
+  - server.js (backend)
+  - public/admin.html (dashboard)
+  - public/cliente.html (menu)
+
+Puoi modificare tutto aprendo i file con Notepad!
+
+
+🎯 CHECKLIST INSTALLAZIONE
+═══════════════════════════════════════════════════════════════════════
+
+□ Node.js installato
+□ Cartella MBL copiata sul Desktop
+□ START_SERVER.bat funziona
+□ OPEN_ADMIN.bat apre dashboard
+□ OPEN_CLIENT.bat apre menu
+□ Password admin cambiata (opzionale)
+□ IP locale trovato per tablet
+□ QR code generato e stampato
+
+
+═══════════════════════════════════════════════════════════════════════
+                    Buon lavoro! 🍺
+═══════════════════════════════════════════════════════════════════════

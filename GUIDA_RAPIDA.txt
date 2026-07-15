@@ -1,0 +1,162 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║              🍺 BLACKOUT PUB - GUIDA RAPIDA 🍺                        ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  📦 INSTALLAZIONE (Prima volta - 5 minuti)                            │
+└───────────────────────────────────────────────────────────────────────┘
+
+1️⃣  Installa Node.js
+    → Doppio click: INSTALLA_NODEJS.bat
+    → Oppure scarica: https://nodejs.org
+    → Riavvia il PC
+
+2️⃣  Copia cartella "MBL" sul Desktop del PC pub
+
+3️⃣  Doppio click: START_SERVER.bat
+    → Aspetta "Server in esecuzione!"
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  🚀 USO QUOTIDIANO                                                    │
+└───────────────────────────────────────────────────────────────────────┘
+
+╔═══════════════════════════════════════════════════════════╗
+║  MATTINA (Apertura Pub)                                   ║
+╚═══════════════════════════════════════════════════════════╝
+
+    📁 Doppio click: START_SERVER.bat
+    
+    ✅ Si apre:
+       - Finestra nera (SERVER) → LASCIA APERTA!
+       - Browser con menu principale
+    
+    ✅ Tutto pronto!
+
+
+╔═══════════════════════════════════════════════════════════╗
+║  CAMBIO FUSTO (Quando finisce una birra)                  ║
+╚═══════════════════════════════════════════════════════════╝
+
+    📁 Doppio click: OPEN_ADMIN.bat
+    
+    🔐 Login: admin123
+    
+    🍺 Trova la spina (es. Spina 3)
+    
+    🔍 Digita nel filtro: "nome birra" o "birrificio"
+       (es. "baladin" → mostra solo birre Baladin)
+    
+    📋 Scegli birra dal menu a tendina
+    
+    ✅ Click: "Aggiorna"
+    
+    🎉 FATTO! Clienti vedono nuova birra!
+
+
+╔═══════════════════════════════════════════════════════════╗
+║  MENU CLIENTI (Mostra ai clienti)                         ║
+╚═══════════════════════════════════════════════════════════╝
+
+    📁 Doppio click: OPEN_CLIENT.bat
+    
+    🖥️  Metti a schermo intero: Premi F11
+    
+    📱 O genera QR code per smartphone clienti
+
+
+╔═══════════════════════════════════════════════════════════╗
+║  SERA (Chiusura Pub)                                      ║
+╚═══════════════════════════════════════════════════════════╝
+
+    📁 Doppio click: STOP_SERVER.bat
+    
+    ✅ Server fermato
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  🎯 FILE IMPORTANTI                                                   │
+└───────────────────────────────────────────────────────────────────────┘
+
+📁 START_SERVER.bat    → Avvia tutto (ogni giorno)
+📁 OPEN_ADMIN.bat      → Apre dashboard (per cambiare birre)
+📁 OPEN_CLIENT.bat     → Apre menu clienti
+📁 STOP_SERVER.bat     → Ferma server (a fine giornata)
+
+📄 .env                → Password admin
+📄 server.js           → Catalogo birre (aggiungi/modifica)
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  📱 ACCESSO DA TABLET/SMARTPHONE                                      │
+└───────────────────────────────────────────────────────────────────────┘
+
+1️⃣  Trova IP del PC:
+    → Apri "Prompt dei comandi" (CMD)
+    → Digita: ipconfig
+    → Cerca: Indirizzo IPv4 (es. 192.168.1.100)
+
+2️⃣  Su tablet/smartphone (stessa WiFi):
+    → Admin:   http://192.168.1.100:3000/admin.html
+    → Cliente: http://192.168.1.100:3000/cliente.html
+
+3️⃣  QR Code per clienti:
+    → https://www.qr-code-generator.com
+    → Incolla URL cliente
+    → Stampa e appendi ai tavoli
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  ⚙️  PERSONALIZZAZIONI                                                │
+└───────────────────────────────────────────────────────────────────────┘
+
+🔐 Cambiare Password:
+   1. Click destro su: .env
+   2. Apri con Notepad
+   3. Cambia: ADMIN_PASSWORD=tuapassword
+   4. Salva
+   5. Riavvia server
+
+🍺 Aggiungere Birre:
+   1. Click destro su: server.js
+   2. Apri con Notepad
+   3. Cerca: catalogoBirre
+   4. Copia ultima birra e modifica
+   5. Salva
+   6. Riavvia server
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  ❓ PROBLEMI COMUNI                                                   │
+└───────────────────────────────────────────────────────────────────────┘
+
+❌ "Node.js non installato"
+   → Installa Node.js (INSTALLA_NODEJS.bat)
+
+❌ "Porta già in uso"
+   → Ferma altri programmi o cambia porta in .env (PORT=3001)
+
+❌ Pagina bianca
+   → Controlla che START_SERVER.bat sia aperto (finestra nera)
+
+❌ Password non funziona
+   → Controlla .env (senza spazi)
+
+
+┌───────────────────────────────────────────────────────────────────────┐
+│  📞 SUPPORTO                                                          │
+└───────────────────────────────────────────────────────────────────────┘
+
+Tutto il codice è modificabile con Notepad!
+
+File principali:
+- server.js          (backend + catalogo birre)
+- public/admin.html  (dashboard admin)
+- public/cliente.html(menu clienti)
+
+
+═══════════════════════════════════════════════════════════════════════
+                 Sviluppato per BlackOut Pub Carpi
+                         Buon lavoro! 🍺
+═══════════════════════════════════════════════════════════════════════

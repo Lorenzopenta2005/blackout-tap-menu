@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackOut Pub</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #000000; --white: #ffffff; --red: #ff0000;
+      --gray: #888888; --muted: #444444; --card: #0d0d0d; --border: #1a1a1a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', sans-serif; background: var(--black); color: var(--white); min-height: 100vh; }
+
+    /* HERO */
+    .hero { text-align: center; padding: 48px 20px 32px; border-bottom: 1px solid var(--border); }
+    .logo { font-size: 3.5rem; letter-spacing: 4px; font-weight: 900; color: var(--white); text-transform: uppercase; line-height: 1; }
+    .flipped-k { color: var(--red); display: inline-block; transform: scaleX(-1); }
+    .hero-subtitle { font-size: 0.7rem; letter-spacing: 6px; color: var(--gray); text-transform: uppercase; margin-top: 12px; }
+    .live-badge { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; padding: 4px 14px; border: 1px solid rgba(255,0,0,0.3); border-radius: 20px; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
+    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 6px var(--red); animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+    /* TABS — due bottoni CTA ben visibili */
+    .tabs-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px 0;
+    }
+    .tabs-row {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      max-width: 480px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 14px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s;
+      white-space: nowrap;
+      /* inattivo: bordo rosso su nero, testo bianco */
+      background: var(--black);
+      color: var(--white);
+      border: 2px solid var(--red);
+    }
+    .tab-btn:hover { border-color: #ff4444; }
+    .tab-btn:active { transform: scale(0.95); }
+    .tab-btn.active {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+      box-shadow: 0 0 15px rgba(255,0,0,0.6);
+    }
+
+    /* Swipe indicator */
+    .swipe-hint {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: #333;
+      user-select: none;
+      animation: swipePulse 2.5s ease-in-out infinite;
+    }
+    .swipe-hint span { color: var(--red); }
+    @keyframes swipePulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* PAGE */
+    .page { padding: 32px 16px 72px; max-width: 960px; margin: 0 auto; }
+    section { display: none; }
+    section.visible { display: block; animation: fadeUp 0.2s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+    .sec-label { text-align: center; font-size: 0.6rem; letter-spacing: 6px; color: var(--muted); text-transform: uppercase; margin-bottom: 28px; }
+
+    /* SPINE GRID */
+    .spine-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+
+    /* TAP CARD */
+    .tap-card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 28px 18px 22px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+    .tap-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 32px; height: 2px; background: var(--red); }
+    .tap-card:hover { transform: translateY(-3px); border-color: rgba(255,0,0,0.4); box-shadow: 0 8px 24px rgba(255,0,0,0.12); }
+
+    /* ROUND BADGE */
+    .badge-circle { width: 100px; height: 100px; border-radius: 50%; overflow: hidden; position: relative; flex-shrink: 0; margin-bottom: 20px; background: #111; box-shadow: 0 0 0 3px var(--black), 0 0 0 5px var(--red), 0 0 16px rgba(255,0,0,0.25), inset 0 0 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+    .badge-circle img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .badge-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 100%; height: 100%; color: var(--muted); }
+    .badge-placeholder span { font-size: 0.42rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; }
+
+    /* CARD TEXT — style is dominant */
+    .beer-style  { font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;   color: var(--white); line-height: 1.1; margin-bottom: 6px; }
+    .beer-name   { font-size: 0.9rem;  font-weight: 600; text-transform: uppercase; letter-spacing: 1px;   color: var(--gray);  margin-bottom: 4px; }
+    .beer-brewery{ font-size: 0.8rem;  font-weight: 400; text-transform: uppercase; letter-spacing: 1px;   color: var(--gray);  margin-bottom: 4px; }
+    .abv-text    { font-size: 0.8rem;  font-weight: 400;                            letter-spacing: 1px;   color: var(--gray);  margin-bottom: 16px; }
+
+    /* PRICES — visibili ma non dominanti */
+    .price-grid  { display: flex; justify-content: center; gap: 8px; width: 100%; margin-top: auto; }
+    .price-box   { flex: 1; max-width: 76px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 7px; padding: 6px 4px; text-align: center; }
+    .price-label { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+    .price-value { font-size: 0.82rem; font-weight: 600; color: var(--gray); }
+    .empty-tap { padding: 10px 0 6px; color: var(--muted); }
+    .empty-tap p { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+
+    /* SUB-CATEGORIES */
+    .subcat-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 0 16px; margin-bottom: 8px; }
+    .subcat-wrap::-webkit-scrollbar { display: none; }
+    .subcat-bar { display: inline-flex; gap: 8px; min-width: max-content; padding: 0 2px; }
+    .subcat-btn { padding: 7px 18px; border: 1px solid var(--border); border-radius: 20px; background: transparent; color: var(--muted); font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .subcat-btn:hover { color: var(--white); border-color: #333; }
+    .subcat-btn.active { background: var(--red); border-color: var(--red); color: var(--white); }
+
+    /* LATTINE */
+    .lattine-search-wrap { position: relative; max-width: 600px; margin: 0 auto 14px; }
+    .lattine-search-wrap .ico { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: .85rem; pointer-events: none; color: var(--muted); }
+    .lattine-search-wrap input { width: 100%; padding: 11px 16px 11px 40px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; color: var(--white); font-size: .85rem; letter-spacing: 1px; transition: border-color .2s; }
+    .lattine-search-wrap input::placeholder { color: var(--muted); }
+    .lattine-search-wrap input:focus { outline: none; border-color: var(--red); }
+    .lattine-count { text-align: center; font-size: .65rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+    .lattine-list { display: flex; flex-direction: column; gap: 10px; max-width: 640px; margin: 0 auto; }
+
+    .lattina-row { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 10px; padding: 14px 18px; transition: border-color .2s, background .2s; animation: fadeUp .2s ease; }
+    .lattina-row:hover { background: #111; border-left-color: var(--white); }
+
+    .can-thumb { width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0; overflow: hidden; background: #111; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 0 2px var(--border), 0 0 0 3px rgba(255,0,0,0.15); }
+    .can-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .can-thumb svg { opacity: 0.3; }
+
+    .lattina-info { flex: 1; min-width: 0; }
+    .lattina-style { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .lattina-name { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; }
+    .lattina-meta { font-size: 0.62rem; color: var(--muted); margin-top: 3px; }
+    .lattina-meta .sep { margin: 0 5px; }
+    .gf-badge { display: inline-flex; align-items: center; padding: 1px 8px; border: 1px solid rgba(34,197,94,0.3); border-radius: 20px; font-size: 0.58rem; font-weight: 700; color: #4ade80; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; width: fit-content; }
+    .lattina-price { font-size: 1.2rem; font-weight: 700; color: var(--white); white-space: nowrap; }
+
+    .list-empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 24px 16px; color: var(--muted); font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; border-top: 1px solid var(--border); }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      .spine-grid { grid-template-columns: 1fr; }
+      .tab-btn { padding: 9px 18px; font-size: 0.68rem; }
+      .badge-circle { width: 80px; height: 80px; }
+      .beer-style { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 class="logo">BLAC<span class="flipped-k">K</span>OUT</h1>
+    <p class="hero-subtitle">Birra - Panini - Biliardi</p>
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      <span id="statusText">Connessione...</span>
+    </div>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tabs-pill">
+      <button class="tab-btn active" onclick="showSection('spina', this)">Alla Spina</button>
+      <button class="tab-btn"        onclick="showSection('lattina', this)">In Lattina</button>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <section id="sec-spina" class="visible">
+      <p class="sec-label">Beer on Tap</p>
+      <div class="spine-grid" id="spineContainer"></div>
+    </section>
+
+    <section id="sec-lattina">
+      <p class="sec-label">Birre in Lattina</p>
+      <div class="subcat-wrap">
+        <div class="subcat-bar" id="subcatBar">
+          <button class="subcat-btn active" data-cat="tutte">Tutte</button>
+          <button class="subcat-btn" data-cat="luppolate">Luppolate</button>
+          <button class="subcat-btn" data-cat="chiare">Chiare &amp; Fresche</button>
+          <button class="subcat-btn" data-cat="scure">Scure &amp; Ambrate</button>
+          <button class="subcat-btn" data-cat="acide">Acide &amp; Fruttate</button>
+          <button class="subcat-btn" data-cat="speciali">Speciali</button>
+        </div>
+      </div>
+      <div class="lattine-search-wrap">
+        <span class="ico">&#128269;</span>
+        <input type="text" id="lattineSearch" placeholder="Cerca per nome o birrificio..." oninput="filtraLattine()">
+      </div>
+      <div class="lattine-count" id="lattineCount"></div>
+      <div class="lattine-list" id="lattineContainer">
+        <div class="list-empty">Caricamento...</div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>@blackoutpubcarpi</footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    const CATEGORIE = {
+      tutte:     null,
+      luppolate: ['IPA','Session IPA','New England IPA','Imperial IPA','Double IPA','Pale Ale','Extra Pale Ale'],
+      chiare:    ['Lager','Helles','Italian Pils','Pils','Pilsner','Blanche','Saison'],
+      scure:     ['Stout','Porter','Red Ale','Amber Ale','Bock','Dunkelbock'],
+      acide:     ['Sour','Gose','Lambic','Berliner Weisse'],
+      speciali:  ['Spiced Ale','Strong Ale','Barley Wine','Imperial Stout'],
+    };
+
+    let _tutteLattine = [];
+    let _activeCat    = 'tutte';
+
+    /* SVG fallbacks via DOM — no innerHTML escaping issues */
+    function svgTap() {
+      const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      s.setAttribute('width','34'); s.setAttribute('height','34');
+      s.setAttribute('viewBox','0 0 24 24'); s.setAttribute('fill','none');
+      s.setAttribute('stroke','currentColor'); s.setAttribute('stroke-width','1.2');
+      s.setAttribute('stroke-linecap','round'); s.setAttribute('stroke-linejoin','round');
+      s.innerHTML = '<path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M5 11h12v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/><path d="M5 7h14l-1 4H6z"/><path d="M9 3v4M13 3v4"/>';
+      return s;
+    }
+    function svgCan() {
+      const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      s.setAttribute('width','20'); s.setAttribute('height','20');
+      s.setAttribute('viewBox','0 0 24 24'); s.setAttribute('fill','none');
+      s.setAttribute('stroke','currentColor'); s.setAttribute('stroke-width','1.5');
+      s.setAttribute('stroke-linecap','round'); s.setAttribute('stroke-linejoin','round');
+      s.innerHTML = '<path d="M8 3h8l1 2v14l-1 2H8l-1-2V5z"/><path d="M8 3c0 1.1 1.8 2 4 2s4-.9 4-2"/><path d="M7 19c0 1.1 1.8 2 4 2s4-.9 4-2"/>';
+      return s;
+    }
+
+    /* Tab navigation */
+    function showSection(name, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
+      btn.classList.add('active');
+      document.getElementById('sec-' + name).classList.add('visible');
+    }
+
+    /* Sub-category pills */
+    document.getElementById('subcatBar').addEventListener('click', function(e) {
+      const btn = e.target.closest('.subcat-btn');
+      if (!btn) return;
+      document.querySelectorAll('.subcat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      _activeCat = btn.dataset.cat;
+      document.getElementById('lattineSearch').value = '';
+      _renderLattineFiltrate(_filtraPerCategoria(_tutteLattine));
+    });
+
+    function _filtraPerCategoria(lista) {
+      if (_activeCat === 'tutte' || !CATEGORIE[_activeCat]) return lista;
+      return lista.filter(b =>
+        b.tipologia && CATEGORIE[_activeCat].some(t => b.tipologia.toLowerCase().includes(t.toLowerCase()))
+      );
+    }
+
+    function filtraLattine() {
+      const term = document.getElementById('lattineSearch').value.toLowerCase().trim();
+      let base = _filtraPerCategoria(_tutteLattine);
+      if (term) base = base.filter(b =>
+        b.nome.toLowerCase().includes(term) ||
+        b.birrificio.toLowerCase().includes(term) ||
+        (b.tipologia && b.tipologia.toLowerCase().includes(term))
+      );
+      _renderLattineFiltrate(base, term);
+    }
+
+    /* Badge circle (DOM only — no innerHTML for images) */
+    function buildBadgeCircle(imgUrl, altText) {
+      const circle = document.createElement('div');
+      circle.className = 'badge-circle';
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.alt = altText; img.src = imgUrl;
+        img.onerror = function() { this.remove(); circle.appendChild(buildPlaceholder(altText)); };
+        circle.appendChild(img);
+      } else {
+        circle.appendChild(buildPlaceholder(altText));
+      }
+      return circle;
+    }
+    function buildPlaceholder(text) {
+      const ph = document.createElement('div'); ph.className = 'badge-placeholder';
+      ph.appendChild(svgTap());
+      const lbl = document.createElement('span'); lbl.textContent = text.substring(0, 12);
+      ph.appendChild(lbl);
+      return ph;
+    }
+
+    /* Can thumb */
+    function buildCanThumb(imgUrl) {
+      const thumb = document.createElement('div'); thumb.className = 'can-thumb';
+      if (imgUrl) {
+        const img = document.createElement('img'); img.src = imgUrl;
+        img.onerror = function() { this.remove(); thumb.appendChild(svgCan()); };
+        thumb.appendChild(img);
+      } else {
+        thumb.appendChild(svgCan());
+      }
+      return thumb;
+    }
+
+    /* Build tap card */
+    function buildTapCard(spina) {
+      const card = document.createElement('div');
+      card.className = 'tap-card'; card.dataset.spina = spina.numero_spina;
+
+      if (spina.birra) {
+        const b = spina.birra;
+        card.appendChild(buildBadgeCircle(b.immagine_url, b.tipologia || b.nome));
+
+        const style = document.createElement('div'); style.className = 'beer-style';
+        style.textContent = b.tipologia || b.nome; card.appendChild(style);
+
+        const name = document.createElement('div'); name.className = 'beer-name';
+        name.textContent = b.nome; card.appendChild(name);
+
+        const brew = document.createElement('div'); brew.className = 'beer-brewery';
+        brew.textContent = b.birrificio; card.appendChild(brew);
+
+        const abv = document.createElement('div'); abv.className = 'abv-text';
+        abv.textContent = b.gradazione_alcolica + '% vol'; card.appendChild(abv);
+
+        const pg = document.createElement('div'); pg.className = 'price-grid';
+        pg.innerHTML =
+          '<div class="price-box"><div class="price-label">Piccola</div><div class="price-value">€' + b.prezzo_piccola.toFixed(2) + '</div></div>' +
+          '<div class="price-box"><div class="price-label">Media</div><div class="price-value">€' + b.prezzo_media.toFixed(2) + '</div></div>';
+        card.appendChild(pg);
+
+      } else {
+        card.appendChild(buildBadgeCircle(null, 'Vuota'));
+        const et = document.createElement('div'); et.className = 'empty-tap';
+        et.innerHTML = '<p>Non Disponibile</p>'; card.appendChild(et);
+      }
+      return card;
+    }
+
+    function renderSpine(spine) {
+      const c = document.getElementById('spineContainer');
+      c.innerHTML = '';
+      spine.forEach(s => c.appendChild(buildTapCard(s)));
+    }
+
+    /* Render lattine */
+    function renderLattine(lattine) {
+      _tutteLattine = lattine || [];
+      document.getElementById('lattineSearch').value = '';
+      _activeCat = 'tutte';
+      document.querySelectorAll('.subcat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'tutte'));
+      _renderLattineFiltrate(_tutteLattine);
+    }
+
+    function _renderLattineFiltrate(lista, term) {
+      const c   = document.getElementById('lattineContainer');
+      const cnt = document.getElementById('lattineCount');
+      if (!lista || !lista.length) {
+        c.innerHTML = '<div class="list-empty">' + (term ? 'Nessun risultato per "' + term + '"' : 'Nessuna birra disponibile') + '</div>';
+        cnt.textContent = ''; return;
+      }
+      cnt.textContent = lista.length + (lista.length === 1 ? ' birra' : ' birre');
+      c.innerHTML = '';
+      lista.forEach(b => {
+        const row = document.createElement('div'); row.className = 'lattina-row';
+        row.appendChild(buildCanThumb(b.immagine_url));
+
+        const info = document.createElement('div'); info.className = 'lattina-info';
+        const sty  = document.createElement('div'); sty.className  = 'lattina-style'; sty.textContent = b.tipologia || b.nome;
+        const nm   = document.createElement('div'); nm.className   = 'lattina-name';  nm.textContent  = b.nome;
+        const mt   = document.createElement('div'); mt.className   = 'lattina-meta';
+        mt.innerHTML = b.birrificio + '<span class="sep">&#183;</span>' + b.gradazione_alcolica + '% vol';
+        info.appendChild(sty); info.appendChild(nm); info.appendChild(mt);
+        if (b.gluten_free) {
+          const gf = document.createElement('div'); gf.className = 'gf-badge'; gf.textContent = 'Gluten Free'; info.appendChild(gf);
+        }
+        row.appendChild(info);
+
+        const price = document.createElement('div'); price.className = 'lattina-price';
+        price.textContent = '€' + b.prezzo_unico.toFixed(2); row.appendChild(price);
+        c.appendChild(row);
+      });
+    }
+
+    /* Socket */
+    socket.on('connect',    () => { document.getElementById('statusText').textContent = 'Live'; });
+    socket.on('disconnect', () => { document.getElementById('statusText').textContent = 'Offline'; });
+    socket.on('menu_spine_aggiornato',   spine   => renderSpine(spine));
+    socket.on('menu_lattine_aggiornato', lattine => renderLattine(lattine));
+
+    /* Initial fetch */
+    (async () => {
+      try {
+        const [rs, rl] = await Promise.all([
+          fetch('/api/spine').then(r => r.json()),
+          fetch('/api/lattine').then(r => r.json()),
+        ]);
+        if (rs.success) renderSpine(rs.data);
+        if (rl.success) renderLattine(rl.data);
+      } catch(e) { console.error('Init fetch error', e); }
+    })();
+  </script>
+</body>
+</html>
