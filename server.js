@@ -20,42 +20,49 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // =============================================================================
-// SEED DATA — usato solo se le tabelle sono vuote
+// SEED DATA
 // =============================================================================
 
 const SEED_BIRRE = [
-  { id: 1,  formato: 'spina', nome: 'URTYP',         birrificio: 'PAULANER',            tipologia: 'Helles',       gradazione_alcolica: 5.5, prezzo_piccola: 3.00, prezzo_media: 4.50, disponibile: true, immagine_url: '/images/paulaner.png',          prezzo_unico: null, gluten_free: false },
-  { id: 2,  formato: 'spina', nome: 'RAPID',         birrificio: 'BREWORT',             tipologia: 'Lager',        gradazione_alcolica: 5.3, prezzo_piccola: 3.50, prezzo_media: 5.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 3,  formato: 'spina', nome: 'ESTIVALE',      birrificio: 'LA RULLES',           tipologia: 'Saison',       gradazione_alcolica: 5.2, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 4,  formato: 'spina', nome: 'BOCK',          birrificio: 'BANDIGA',             tipologia: 'Bock',         gradazione_alcolica: 6.2, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 5,  formato: 'spina', nome: 'STOUT',         birrificio: 'BANDIGA',             tipologia: 'Stout',        gradazione_alcolica: 5.5, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: '/images/stout-bandiga.png',     prezzo_unico: null, gluten_free: false },
-  { id: 6,  formato: 'spina', nome: 'RENNA RIBELLE', birrificio: 'PORTA BRUCIATA',      tipologia: 'Red Ale',      gradazione_alcolica: 6.5, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 7,  formato: 'spina', nome: 'JAMBON ATTACKS',birrificio: 'MUTNINK',             tipologia: 'IPA',          gradazione_alcolica: 6.2, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 8,  formato: 'spina', nome: 'BERRY DROP',    birrificio: 'VETRA',               tipologia: 'Sour',         gradazione_alcolica: 4.5, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 9,  formato: 'spina', nome: 'GOSE',          birrificio: 'BANDIGA',             tipologia: 'Gose',         gradazione_alcolica: 4.5, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 10, formato: 'spina', nome: 'DUNKELBOCK',    birrificio: 'BANDIGA',             tipologia: 'Dunkelbock',   gradazione_alcolica: 6.5, prezzo_piccola: 3.50, prezzo_media: 5.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 11, formato: 'spina', nome: 'ITALIAN PILS',  birrificio: 'BANDIGA',             tipologia: 'Italian Pils', gradazione_alcolica: 5.0, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 12, formato: 'spina', nome: 'ZHULKA',        birrificio: 'MUTTNIK',             tipologia: 'Imperial IPA', gradazione_alcolica: 8.0, prezzo_piccola: 4.50, prezzo_media: 6.50, disponibile: true, immagine_url: '/images/zhulka-muttnik.png',   prezzo_unico: null, gluten_free: false },
-  { id: 13, formato: 'spina', nome: 'ISAAC',         birrificio: 'BALADIN',             tipologia: 'Blanche',      gradazione_alcolica: 5.0, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 14, formato: 'spina', nome: 'NORA',          birrificio: 'BALADIN',             tipologia: 'Spiced Ale',   gradazione_alcolica: 6.8, prezzo_piccola: 4.50, prezzo_media: 6.50, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 15, formato: 'spina', nome: 'TIPOPILS',      birrificio: 'BIRRIFICIO ITALIANO', tipologia: 'Italian Pils', gradazione_alcolica: 5.2, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 16, formato: 'spina', nome: 'AMBER SHOCK',   birrificio: 'BIRRIFICIO ITALIANO', tipologia: 'Amber Ale',    gradazione_alcolica: 7.0, prezzo_piccola: 4.50, prezzo_media: 6.50, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 17, formato: 'spina', nome: 'PUNK IPA',      birrificio: 'BREWDOG',             tipologia: 'IPA',          gradazione_alcolica: 5.6, prezzo_piccola: 4.50, prezzo_media: 6.50, disponibile: true, immagine_url: '/images/brewdog-punk-ipa.png', prezzo_unico: null, gluten_free: false },
-  { id: 18, formato: 'spina', nome: 'DEAD PONY CLUB',birrificio: 'BREWDOG',             tipologia: 'Session IPA',  gradazione_alcolica: 3.8, prezzo_piccola: 3.50, prezzo_media: 5.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 19, formato: 'spina', nome: 'MOTOR OIL',     birrificio: 'BREWFIST',            tipologia: 'Porter',       gradazione_alcolica: 6.5, prezzo_piccola: 4.50, prezzo_media: 6.50, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 20, formato: 'spina', nome: 'SPACEMAN',      birrificio: 'BREWFIST',            tipologia: 'Pale Ale',     gradazione_alcolica: 5.3, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 21, formato: 'spina', nome: 'REBEERS',       birrificio: 'BIRRA DEL BORGO',     tipologia: 'Lager',        gradazione_alcolica: 6.0, prezzo_piccola: 4.00, prezzo_media: 6.00, disponibile: true, immagine_url: null,                            prezzo_unico: null, gluten_free: false },
-  { id: 22, formato: 'lattina', nome: 'ZIP',            birrificio: 'BREWFIST',        tipologia: 'Italian Pils',   gradazione_alcolica: 5.1, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: '/images/brewort-zip.png', prezzo_unico: 6.00, gluten_free: true  },
-  { id: 23, formato: 'lattina', nome: 'ELVIS JUICE',    birrificio: 'BREWDOG',         tipologia: 'IPA',             gradazione_alcolica: 6.5, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.50, gluten_free: false },
-  { id: 24, formato: 'lattina', nome: 'PAZZESKA',       birrificio: 'BREWFIST',        tipologia: 'Session IPA',     gradazione_alcolica: 4.0, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: '/images/pazzeska.png',   prezzo_unico: 6.00, gluten_free: false },
-  { id: 25, formato: 'lattina', nome: 'SETA',           birrificio: 'BIRRA DEL BORGO', tipologia: 'Blanche',         gradazione_alcolica: 4.7, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 4.50, gluten_free: false },
-  { id: 26, formato: 'lattina', nome: 'OPEN TO DEBATE', birrificio: 'BALADIN',         tipologia: 'Amber Ale',       gradazione_alcolica: 5.8, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.00, gluten_free: false },
-  { id: 27, formato: 'lattina', nome: 'PUNK IPA',       birrificio: 'BREWDOG',         tipologia: 'IPA',             gradazione_alcolica: 5.6, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.00, gluten_free: false },
-  { id: 28, formato: 'lattina', nome: 'HAZY JANE',      birrificio: 'BREWDOG',         tipologia: 'New England IPA', gradazione_alcolica: 5.0, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.00, gluten_free: false },
-  { id: 29, formato: 'lattina', nome: 'LOST LAGER',     birrificio: 'BREWDOG',         tipologia: 'Lager',           gradazione_alcolica: 4.7, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 4.50, gluten_free: false },
-  { id: 30, formato: 'lattina', nome: 'TORPEDO',        birrificio: 'SIERRA NEVADA',   tipologia: 'IPA',             gradazione_alcolica: 7.2, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.50, gluten_free: false },
-  { id: 31, formato: 'lattina', nome: 'RE ALE EXTRA',   birrificio: 'BIRRA DEL BORGO', tipologia: 'Extra Pale Ale',  gradazione_alcolica: 6.4, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.50, gluten_free: false },
-  { id: 32, formato: 'lattina', nome: 'NORA',           birrificio: 'BALADIN',         tipologia: 'Spiced Ale',      gradazione_alcolica: 6.8, prezzo_piccola: null, prezzo_media: null, disponibile: true,  immagine_url: null,                     prezzo_unico: 5.50, gluten_free: false },
+  { id: 1,  formato: 'spina',   nome: 'URTYP',         birrificio: 'PAULANER',            tipologia: 'Helles',       gradazione_alcolica: 5.5, prezzo_piccola: 3.00, prezzo_media: 4.50, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/paulaner.png' },
+  { id: 2,  formato: 'spina',   nome: 'RAPID',         birrificio: 'BREWORT',             tipologia: 'Lager',        gradazione_alcolica: 5.3, prezzo_piccola: 3.50, prezzo_media: 5.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/viennalager.png' },
+  { id: 3,  formato: 'spina',   nome: 'ESTIVALE',      birrificio: 'LA RULLES',           tipologia: 'Saison',       gradazione_alcolica: 5.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/estivale-rulles.png' },
+  { id: 4,  formato: 'spina',   nome: 'BOCK',          birrificio: 'BANDIGA',             tipologia: 'Bock',         gradazione_alcolica: 6.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/bandiga-bock.png' },
+  { id: 5,  formato: 'spina',   nome: 'STOUT',         birrificio: 'BANDIGA',             tipologia: 'Stout',        gradazione_alcolica: 5.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/stout-bandiga.png' },
+  { id: 6,  formato: 'spina',   nome: 'RENNA RIBELLE', birrificio: 'PORTA BRUCIATA',      tipologia: 'Red Ale',      gradazione_alcolica: 6.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/renna-ribelle.png' },
+  { id: 7,  formato: 'spina',   nome: 'JAMBON ATTACKS',birrificio: 'MUTNINK',             tipologia: 'IPA',          gradazione_alcolica: 6.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/jambon-attack.png' },
+  { id: 8,  formato: 'spina',   nome: 'BERRY DROP',    birrificio: 'VETRA',               tipologia: 'Fruit Beer',   gradazione_alcolica: 4.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/berrydrop-vetra.png' },
+  { id: 9,  formato: 'spina',   nome: 'SAN LORENZO',   birrificio: 'MC-77',               tipologia: 'Blanche',      gradazione_alcolica: 5.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/sanlorenzo.png' },
+  { id: 10, formato: 'spina',   nome: 'BOCKBIER',      birrificio: 'MÖNCHSHOF',           tipologia: 'Bock',         gradazione_alcolica: 6.9, prezzo_piccola: 3.50, prezzo_media: 5.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/bockbier.png' },
+  { id: 11, formato: 'spina',   nome: 'ITALIAN PILS',  birrificio: 'BANDIGA',             tipologia: 'Italian Pils', gradazione_alcolica: 5.0, prezzo_piccola: 4.00, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/italian-pils-bandiga.png' },
+  { id: 12, formato: 'spina',   nome: 'ZHULKA',        birrificio: 'MUTTNIK',             tipologia: 'Imperial IPA', gradazione_alcolica: 8.0, prezzo_piccola: 4.50, prezzo_media: 6.50, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/zhulka-muttnik.png' },
+  { id: 13, formato: 'spina',   nome: 'MINI',          birrificio: 'HAMMER',              tipologia: 'Session IPA',  gradazione_alcolica: 4.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/session-ipa-mini.png' },
+  { id: 14, formato: 'spina',   nome: 'DUNKELBOCK',    birrificio: 'FALKENTRUM',          tipologia: 'Stark bier',   gradazione_alcolica: 7.0, prezzo_piccola: 3.50, prezzo_media: 5.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/dunkelbock.png' },
+  { id: 15, formato: 'spina',   nome: 'TIPOPILS',      birrificio: 'BIRRIFICIO ITALIANO', tipologia: 'Italian Pils', gradazione_alcolica: 5.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/tipopils.png' },
+  { id: 16, formato: 'spina',   nome: 'ANARCHISTE',    birrificio: '100VENTI',            tipologia: 'Belgian blonde', gradazione_alcolica: 5.9, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/anarchiste.png' },
+  { id: 17, formato: 'spina',   nome: 'BLANCHE',       birrificio: 'BANDIGA',             tipologia: 'Blanche',      gradazione_alcolica: 4.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/blanche-bandiga.png' },
+  { id: 18, formato: 'spina',   nome: 'COSMIC',        birrificio: 'LAMBRATE',            tipologia: 'Session IPA',  gradazione_alcolica: 4.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/cosmic-lambrate.png' },
+  { id: 19, formato: 'spina',   nome: 'MACCHÈKELLER',  birrificio: 'LAMBRATE',            tipologia: 'Keller',       gradazione_alcolica: 4.7, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ma_che_keller_lambrate.png' },
+  { id: 20, formato: 'spina',   nome: 'WAVE RUNNER',   birrificio: 'HAMMER',              tipologia: 'American IPA', gradazione_alcolica: 6.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/waverunner-hammer.png' },
+  { id: 21, formato: 'spina',   nome: 'VIOLET FEVER',  birrificio: 'GRANDA',              tipologia: 'Fruit Beer',   gradazione_alcolica: 5.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/violetfever-granda.png' },
+  { id: 33, formato: 'spina',   nome: 'DOUBLE IPA',    birrificio: 'CLATERNA',            tipologia: 'Double IPA',   gradazione_alcolica: 8.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/dipam-claterna.png' },
+  { id: 34, formato: 'spina',   nome: 'BOLIK',         birrificio: 'MUTTNIK',             tipologia: 'APA',          gradazione_alcolica: 5.4, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/bolik-muttnik.png' },
+  { id: 35, formato: 'spina',   nome: 'IPA',           birrificio: 'BANDIGA',             tipologia: 'IPA',          gradazione_alcolica: 6.3, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/bandiga-ipa.png' },
+  { id: 36, formato: 'spina',   nome: 'GOSE',          birrificio: 'BANDIGA',             tipologia: 'GOSE',         gradazione_alcolica: 4.3, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/bandiga-gose.png' },
+  { id: 37, formato: 'spina',   nome: 'FLEUR SOFRONIA',birrificio: 'MC-77',               tipologia: 'BLANCHE',      gradazione_alcolica: 5.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/sofronia.png' },
+  { id: 38, formato: 'spina',   nome: 'GHISA',         birrificio: 'LAMBRATE',            tipologia: 'STOUT',        gradazione_alcolica: 5.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ghisa.png' },
+  { id: 39, formato: 'spina',   nome: 'SESSION TRIPEL',birrificio: 'BANDIGA',             tipologia: 'Belgian Blond Ale',         gradazione_alcolica: 5.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/tripel-bandiga.png' },
+  { id: 22, formato: 'lattina', nome: 'ZIP',           birrificio: 'BREWFIST',            tipologia: 'Italian Pils', gradazione_alcolica: 5.1, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: true,  immagine_url: '/images/brewort-zip.png' },
+  { id: 23, formato: 'lattina', nome: 'BUNDES',        birrificio: 'HAMMER',              tipologia: 'Pils',         gradazione_alcolica: 5.2, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: false, immagine_url: '/images/bundes.png' },
+  { id: 24, formato: 'lattina', nome: 'PAZZESKA',       birrificio: 'BREWFIST',           tipologia: 'Session IPA',  gradazione_alcolica: 4.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: false, immagine_url: '/images/pazzeska.png' },
+  { id: 25, formato: 'lattina', nome: 'MINI',           birrificio: 'HAMMER',             tipologia: 'Session IPA',  gradazione_alcolica: 4.2, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: false, immagine_url: '/images/session-lattina.png' },
+  { id: 26, formato: 'lattina', nome: 'OPEN TO DEBATE', birrificio: 'BALADIN',         tipologia: 'Amber Ale',       gradazione_alcolica: 5.8, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 5.00, disponibile: true,  gluten_free: false, immagine_url: null },
+  { id: 27, formato: 'lattina', nome: 'PUNK IPA',       birrificio: 'BREWDOG',         tipologia: 'IPA',             gradazione_alcolica: 5.6, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 5.00, disponibile: true,  gluten_free: false, immagine_url: null },
+  { id: 28, formato: 'lattina', nome: 'HAZY JANE',      birrificio: 'BREWDOG',         tipologia: 'New England IPA', gradazione_alcolica: 5.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 5.00, disponibile: true,  gluten_free: false, immagine_url: null },
+  { id: 29, formato: 'lattina', nome: 'LOST LAGER',     birrificio: 'BREWDOG',         tipologia: 'Lager',           gradazione_alcolica: 4.7, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 4.50, disponibile: true,  gluten_free: false, immagine_url: null },
+  { id: 30, formato: 'lattina', nome: 'TORPEDO',        birrificio: 'SIERRA NEVADA',   tipologia: 'IPA',             gradazione_alcolica: 7.2, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 5.50, disponibile: true,  gluten_free: false, immagine_url: null },
+  { id: 31, formato: 'lattina', nome: 'RE ALE EXTRA',   birrificio: 'BIRRA DEL BORGO', tipologia: 'Extra Pale Ale',  gradazione_alcolica: 6.4, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 5.50, disponibile: true,  gluten_free: false, immagine_url: null },
+  { id: 32, formato: 'lattina', nome: 'NORA',           birrificio: 'BALADIN',         tipologia: 'Spiced Ale',      gradazione_alcolica: 6.8, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 5.50, disponibile: true,  gluten_free: false, immagine_url: null },
 ];
 
 const SEED_SPINE = [
@@ -70,53 +77,36 @@ const SEED_SPINE = [
 ];
 
 // =============================================================================
-// INIT DB — popola le tabelle se vuote
+// INIT DB — sincronizza il catalogo ad ogni avvio
 // =============================================================================
 
 async function initDB() {
-  // Controlla se la tabella birre ha già dati
-  const { data: birreEsistenti, error: errBirre } = await supabase
+  const { error: errTest } = await supabase.from('birre').select('id').limit(1);
+  if (errTest) {
+    console.error('[DB] Tabella "birre" non trovata:', errTest.message);
+    console.error('[DB] Crea le tabelle con lo script in supabase/schema.sql');
+    process.exit(1);
+  }
+
+  // Upsert birre — aggiunge le nuove, aggiorna le esistenti
+  const { error: errBirre } = await supabase
     .from('birre')
-    .select('id')
-    .limit(1);
+    .upsert(SEED_BIRRE, { onConflict: 'id', ignoreDuplicates: false });
+  if (errBirre) { console.error('[DB] Upsert birre fallito:', errBirre.message); process.exit(1); }
 
-  if (errBirre) {
-    // La tabella non esiste ancora su Supabase — devi crearla manualmente
-    // Vedi istruzioni nel README o esegui lo script SQL in supabase/schema.sql
-    console.error('[DB] Tabella "birre" non trovata:', errBirre.message);
-    console.error('[DB] Crea le tabelle su Supabase con lo script SQL allegato.');
-    process.exit(1);
-  }
-
-  if (birreEsistenti.length === 0) {
-    logger.info('Tabella birre vuota — eseguo seed...');
-    const { error } = await supabase.from('birre').insert(SEED_BIRRE);
-    if (error) { logger.error('Seed birre fallito', error); process.exit(1); }
-    logger.info(`Inserite ${SEED_BIRRE.length} birre.`);
-  }
-
-  const { data: spineEsistenti, error: errSpine } = await supabase
+  // Upsert spine — non sovrascrive birra_id già impostato dall'admin
+  const { error: errSpine } = await supabase
     .from('spine')
-    .select('numero_spina')
-    .limit(1);
+    .upsert(SEED_SPINE, { onConflict: 'numero_spina', ignoreDuplicates: true });
+  if (errSpine) { console.error('[DB] Upsert spine fallito:', errSpine.message); process.exit(1); }
 
-  if (errSpine) {
-    console.error('[DB] Tabella "spine" non trovata:', errSpine.message);
-    process.exit(1);
-  }
-
-  if (spineEsistenti.length === 0) {
-    logger.info('Tabella spine vuota — eseguo seed...');
-    const { error } = await supabase.from('spine').insert(SEED_SPINE);
-    if (error) { logger.error('Seed spine fallito', error); process.exit(1); }
-    logger.info('Inserite 8 spine.');
-  }
-
+  logger.info(`Catalogo sincronizzato: ${SEED_BIRRE.length} birre.`);
+  logger.info('Spine sincronizzate.');
   logger.info('Database pronto.');
 }
 
 // =============================================================================
-// DATA ACCESS LAYER — query Supabase
+// DATA ACCESS LAYER
 // =============================================================================
 
 const db = {
@@ -127,90 +117,57 @@ const db = {
     return data;
   },
 
-  getCatalogoSpina: async () => {
-    const { data, error } = await supabase.from('birre').select('*').eq('formato', 'spina').order('id');
-    if (error) throw new Error(error.message);
-    return data;
-  },
-
-  getLattineTutte: async () => {
-    const { data, error } = await supabase.from('birre').select('*').eq('formato', 'lattina').order('id');
-    if (error) throw new Error(error.message);
-    return data;
-  },
-
   getLattineDisponibili: async () => {
-    const { data, error } = await supabase.from('birre').select('*').eq('formato', 'lattina').eq('disponibile', true).order('id');
+    const { data, error } = await supabase
+      .from('birre').select('*').eq('formato', 'lattina').eq('disponibile', true).order('id');
     if (error) throw new Error(error.message);
     return data;
   },
 
-  // Ritorna le 8 spine con i dati della birra joinati
   getSpine: async () => {
-    const { data: spine, error: errSpine } = await supabase
-      .from('spine')
-      .select('numero_spina, birra_id')
-      .order('numero_spina');
-    if (errSpine) throw new Error(errSpine.message);
+    const { data: spine, error: e1 } = await supabase
+      .from('spine').select('numero_spina, birra_id').order('numero_spina');
+    if (e1) throw new Error(e1.message);
 
-    const { data: birre, error: errBirre } = await supabase
-      .from('birre')
-      .select('*')
-      .eq('formato', 'spina');
-    if (errBirre) throw new Error(errBirre.message);
+    const { data: birre, error: e2 } = await supabase
+      .from('birre').select('*').eq('formato', 'spina');
+    if (e2) throw new Error(e2.message);
 
-    const birreMap = Object.fromEntries(birre.map(b => [b.id, b]));
+    const map = Object.fromEntries(birre.map(b => [b.id, b]));
     return spine.map(s => ({
       numero_spina: s.numero_spina,
-      birra: s.birra_id ? (birreMap[s.birra_id] || null) : null,
+      birra: s.birra_id ? (map[s.birra_id] || null) : null,
     }));
   },
 
   aggiornaSpina: async (numero, birraId) => {
-    // Valida che la birra esista (se non null)
     if (birraId !== null) {
       const { data, error } = await supabase.from('birre').select('id').eq('id', birraId).single();
       if (error || !data) throw new Error('Birra non trovata nel catalogo');
     }
     const { error } = await supabase
-      .from('spine')
-      .update({ birra_id: birraId })
-      .eq('numero_spina', numero);
+      .from('spine').update({ birra_id: birraId }).eq('numero_spina', numero);
     if (error) throw new Error(error.message);
     const spine = await db.getSpine();
     return spine.find(s => s.numero_spina === numero);
   },
 
   toggleLattina: async (id) => {
-    // Leggi stato attuale
-    const { data: birra, error: errRead } = await supabase
-      .from('birre')
-      .select('id, nome, disponibile, formato')
-      .eq('id', id)
-      .single();
-    if (errRead || !birra) throw new Error('Lattina non trovata');
+    const { data: birra, error: e1 } = await supabase
+      .from('birre').select('id, nome, disponibile, formato').eq('id', id).single();
+    if (e1 || !birra) throw new Error('Lattina non trovata');
     if (birra.formato !== 'lattina') throw new Error('La birra non è una lattina');
-
-    const nuovoStato = !birra.disponibile;
-    const { data: aggiornata, error: errUpd } = await supabase
-      .from('birre')
-      .update({ disponibile: nuovoStato })
-      .eq('id', id)
-      .select()
-      .single();
-    if (errUpd) throw new Error(errUpd.message);
-    return aggiornata;
+    const { data, error: e2 } = await supabase
+      .from('birre').update({ disponibile: !birra.disponibile }).eq('id', id).select().single();
+    if (e2) throw new Error(e2.message);
+    return data;
   },
 
   aggiornaImmagine: async (id, url) => {
-    const { data: aggiornata, error } = await supabase
-      .from('birre')
-      .update({ immagine_url: url || null })
-      .eq('id', id)
-      .select()
-      .single();
+    const { data, error } = await supabase
+      .from('birre').update({ immagine_url: url || null }).eq('id', id).select().single();
     if (error) throw new Error(error.message);
-    return aggiornata;
+    return data;
   },
 };
 
@@ -224,15 +181,11 @@ const io = new Server(httpServer, {
   cors: { origin: process.env.NODE_ENV === 'production' ? false : '*', methods: ['GET', 'POST'] },
 });
 
-app.use(helmet({
-  contentSecurityPolicy: false,
-  crossOriginResourcePolicy: { policy: 'cross-origin' },
-}));
+app.use(helmet({ contentSecurityPolicy: false, crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
 
-// Rotte HTML — cerca prima in public/, poi nella root (compatibilità Render)
 const serveHtml = (file) => (req, res) => {
   const inPublic = path.join(__dirname, 'public', file);
   const inRoot   = path.join(__dirname, file);
@@ -291,10 +244,8 @@ app.post('/api/spine/aggiorna', requireAdmin, async (req, res) => {
       return res.status(400).json({ success: false, message: 'numero_spina non valido (1-8)' });
     if (birra_id !== null && typeof birra_id !== 'number')
       return res.status(400).json({ success: false, message: 'birra_id deve essere un numero o null' });
-
     const spinaAggiornata = await db.aggiornaSpina(numero, birra_id);
-    const tutte = await db.getSpine();
-    io.emit('menu_spine_aggiornato', tutte);
+    io.emit('menu_spine_aggiornato', await db.getSpine());
     logger.info(`Spina ${numero} → birra_id=${birra_id}`);
     res.json({ success: true, message: 'Spina aggiornata', data: spinaAggiornata });
   } catch (err) { logger.error('POST /api/spine/aggiorna', err); res.status(400).json({ success: false, message: err.message }); }
@@ -305,10 +256,8 @@ app.post('/api/lattine/toggle', requireAdmin, async (req, res) => {
     const { birra_id } = req.body;
     if (!birra_id || typeof birra_id !== 'number')
       return res.status(400).json({ success: false, message: 'birra_id obbligatorio (numero)' });
-
     const aggiornata = await db.toggleLattina(birra_id);
-    const disponibili = await db.getLattineDisponibili();
-    io.emit('menu_lattine_aggiornato', disponibili);
+    io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
     logger.info(`Lattina ${birra_id} (${aggiornata.nome}) → disponibile=${aggiornata.disponibile}`);
     res.json({ success: true, data: aggiornata });
   } catch (err) { logger.error('POST /api/lattine/toggle', err); res.status(400).json({ success: false, message: err.message }); }
@@ -319,13 +268,9 @@ app.post('/api/admin/immagine', requireAdmin, async (req, res) => {
     const { birra_id, immagine_url } = req.body;
     if (!birra_id || typeof birra_id !== 'number')
       return res.status(400).json({ success: false, message: 'birra_id obbligatorio (numero)' });
-
     const aggiornata = await db.aggiornaImmagine(birra_id, immagine_url);
-    if (aggiornata.formato === 'spina') {
-      io.emit('menu_spine_aggiornato', await db.getSpine());
-    } else {
-      io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
-    }
+    if (aggiornata.formato === 'spina') io.emit('menu_spine_aggiornato', await db.getSpine());
+    else io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
     logger.info(`Immagine aggiornata: id=${birra_id}`);
     res.json({ success: true, data: aggiornata });
   } catch (err) { logger.error('POST /api/admin/immagine', err); res.status(400).json({ success: false, message: err.message }); }
@@ -355,7 +300,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: 'Errore interno del server' });
 });
 
-// Avvia prima il DB, poi il server HTTP
 initDB().then(() => {
   httpServer.listen(PORT, () => {
     logger.info(`Server avviato su :${PORT}`);
