@@ -22,53 +22,21 @@
     .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 6px var(--red); animation: blink 2s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
 
-    /* TABS — due bottoni CTA ben visibili */
-    .tabs-wrap {
-      display: flex;
-      justify-content: center;
-      padding: 28px 16px 0;
-    }
-    .tabs-row {
-      display: flex;
-      gap: 12px;
-      width: 100%;
-      max-width: 480px;
-    }
+    /* TABS */
+    .tabs-wrap { display: flex; justify-content: center; padding: 28px 16px 0; }
+    .tabs-row { display: flex; gap: 12px; width: 100%; max-width: 480px; }
     .tab-btn {
-      flex: 1;
-      padding: 14px 10px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: transform 0.1s, box-shadow 0.2s;
-      white-space: nowrap;
-      /* inattivo: bordo rosso su nero, testo bianco */
-      background: var(--black);
-      color: var(--white);
-      border: 2px solid var(--red);
+      flex: 1; padding: 14px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s; white-space: nowrap;
+      background: var(--black); color: var(--white); border: 2px solid var(--red);
     }
     .tab-btn:hover { border-color: #ff4444; }
     .tab-btn:active { transform: scale(0.95); }
-    .tab-btn.active {
-      background: var(--red);
-      color: var(--white);
-      border-color: var(--red);
-      box-shadow: 0 0 15px rgba(255,0,0,0.6);
-    }
+    .tab-btn.active { background: var(--red); color: var(--white); border-color: var(--red); box-shadow: 0 0 15px rgba(255,0,0,0.6); }
 
     /* Swipe indicator */
-    .swipe-hint {
-      text-align: center;
-      margin-top: 14px;
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      color: #333;
-      user-select: none;
-      animation: swipePulse 2.5s ease-in-out infinite;
-    }
+    .swipe-hint { text-align: center; margin-top: 14px; font-size: 0.7rem; letter-spacing: 3px; color: #333; user-select: none; animation: swipePulse 2.5s ease-in-out infinite; }
     .swipe-hint span { color: var(--red); }
     @keyframes swipePulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 
@@ -93,27 +61,19 @@
     .badge-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 100%; height: 100%; color: var(--muted); }
     .badge-placeholder span { font-size: 0.42rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5; }
 
-    /* CARD TEXT — style is dominant */
-    .beer-style  { font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;   color: var(--white); line-height: 1.1; margin-bottom: 6px; }
-    .beer-name   { font-size: 0.9rem;  font-weight: 600; text-transform: uppercase; letter-spacing: 1px;   color: var(--gray);  margin-bottom: 4px; }
-    .beer-brewery{ font-size: 0.8rem;  font-weight: 400; text-transform: uppercase; letter-spacing: 1px;   color: var(--gray);  margin-bottom: 4px; }
-    .abv-text    { font-size: 0.8rem;  font-weight: 400;                            letter-spacing: 1px;   color: var(--gray);  margin-bottom: 16px; }
+    /* CARD TEXT */
+    .beer-style   { font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--white); line-height: 1.1; margin-bottom: 6px; }
+    .beer-name    { font-size: 0.9rem;  font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 4px; }
+    .beer-brewery { font-size: 0.8rem;  font-weight: 400; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 4px; }
+    .abv-text     { font-size: 0.8rem;  font-weight: 400; letter-spacing: 1px; color: var(--gray); margin-bottom: 16px; }
 
-    /* PRICES — visibili ma non dominanti */
+    /* PRICES */
     .price-grid  { display: flex; justify-content: center; gap: 8px; width: 100%; margin-top: auto; }
     .price-box   { flex: 1; max-width: 76px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 7px; padding: 6px 4px; text-align: center; }
     .price-label { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
     .price-value { font-size: 0.82rem; font-weight: 600; color: var(--gray); }
     .empty-tap { padding: 10px 0 6px; color: var(--muted); }
     .empty-tap p { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
-
-    /* SUB-CATEGORIES */
-    .subcat-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 0 16px; margin-bottom: 8px; }
-    .subcat-wrap::-webkit-scrollbar { display: none; }
-    .subcat-bar { display: inline-flex; gap: 8px; min-width: max-content; padding: 0 2px; }
-    .subcat-btn { padding: 7px 18px; border: 1px solid var(--border); border-radius: 20px; background: transparent; color: var(--muted); font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-    .subcat-btn:hover { color: var(--white); border-color: #333; }
-    .subcat-btn.active { background: var(--red); border-color: var(--red); color: var(--white); }
 
     /* LATTINE */
     .lattine-search-wrap { position: relative; max-width: 600px; margin: 0 auto 14px; }
@@ -133,10 +93,15 @@
 
     .lattina-info { flex: 1; min-width: 0; }
     .lattina-style { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .lattina-name { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; }
-    .lattina-meta { font-size: 0.62rem; color: var(--muted); margin-top: 3px; }
+    .lattina-name  { font-size: 0.72rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 3px; }
+    .lattina-meta  { font-size: 0.62rem; color: var(--muted); margin-top: 3px; }
     .lattina-meta .sep { margin: 0 5px; }
-    .gf-badge { display: inline-flex; align-items: center; padding: 1px 8px; border: 1px solid rgba(34,197,94,0.3); border-radius: 20px; font-size: 0.58rem; font-weight: 700; color: #4ade80; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; width: fit-content; }
+
+    /* BADGES */
+    .badges-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+    .gf-badge         { display: inline-flex; align-items: center; padding: 1px 8px; border: 1px solid rgba(34,197,94,0.35);  border-radius: 20px; font-size: 0.58rem; font-weight: 700; color: #4ade80; letter-spacing: 1.5px; text-transform: uppercase; }
+    .analcolico-badge { display: inline-flex; align-items: center; padding: 1px 8px; border: 1px solid rgba(96,165,250,0.35); border-radius: 20px; font-size: 0.58rem; font-weight: 700; color: #60a5fa; letter-spacing: 1.5px; text-transform: uppercase; }
+
     .lattina-price { font-size: 1.2rem; font-weight: 700; color: var(--white); white-space: nowrap; }
 
     .list-empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; }
@@ -165,7 +130,7 @@
   </div>
 
   <div class="tabs-wrap">
-    <div class="tabs-pill">
+    <div class="tabs-row">
       <button class="tab-btn active" onclick="showSection('spina', this)">Alla Spina</button>
       <button class="tab-btn"        onclick="showSection('lattina', this)">In Lattina</button>
     </div>
@@ -180,16 +145,6 @@
 
     <section id="sec-lattina">
       <p class="sec-label">Birre in Lattina</p>
-      <div class="subcat-wrap">
-        <div class="subcat-bar" id="subcatBar">
-          <button class="subcat-btn active" data-cat="tutte">Tutte</button>
-          <button class="subcat-btn" data-cat="luppolate">Luppolate</button>
-          <button class="subcat-btn" data-cat="chiare">Chiare &amp; Fresche</button>
-          <button class="subcat-btn" data-cat="scure">Scure &amp; Ambrate</button>
-          <button class="subcat-btn" data-cat="acide">Acide &amp; Fruttate</button>
-          <button class="subcat-btn" data-cat="speciali">Speciali</button>
-        </div>
-      </div>
       <div class="lattine-search-wrap">
         <span class="ico">&#128269;</span>
         <input type="text" id="lattineSearch" placeholder="Cerca per nome o birrificio..." oninput="filtraLattine()">
@@ -207,20 +162,9 @@
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-
-    const CATEGORIE = {
-      tutte:     null,
-      luppolate: ['IPA','Session IPA','New England IPA','Imperial IPA','Double IPA','Pale Ale','Extra Pale Ale'],
-      chiare:    ['Lager','Helles','Italian Pils','Pils','Pilsner','Blanche','Saison'],
-      scure:     ['Stout','Porter','Red Ale','Amber Ale','Bock','Dunkelbock'],
-      acide:     ['Sour','Gose','Lambic','Berliner Weisse'],
-      speciali:  ['Spiced Ale','Strong Ale','Barley Wine','Imperial Stout'],
-    };
-
     let _tutteLattine = [];
-    let _activeCat    = 'tutte';
 
-    /* SVG fallbacks via DOM — no innerHTML escaping issues */
+    /* SVG fallbacks */
     function svgTap() {
       const s = document.createElementNS('http://www.w3.org/2000/svg','svg');
       s.setAttribute('width','34'); s.setAttribute('height','34');
@@ -248,36 +192,20 @@
       document.getElementById('sec-' + name).classList.add('visible');
     }
 
-    /* Sub-category pills */
-    document.getElementById('subcatBar').addEventListener('click', function(e) {
-      const btn = e.target.closest('.subcat-btn');
-      if (!btn) return;
-      document.querySelectorAll('.subcat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      _activeCat = btn.dataset.cat;
-      document.getElementById('lattineSearch').value = '';
-      _renderLattineFiltrate(_filtraPerCategoria(_tutteLattine));
-    });
-
-    function _filtraPerCategoria(lista) {
-      if (_activeCat === 'tutte' || !CATEGORIE[_activeCat]) return lista;
-      return lista.filter(b =>
-        b.tipologia && CATEGORIE[_activeCat].some(t => b.tipologia.toLowerCase().includes(t.toLowerCase()))
-      );
-    }
-
+    /* Ricerca lattine */
     function filtraLattine() {
       const term = document.getElementById('lattineSearch').value.toLowerCase().trim();
-      let base = _filtraPerCategoria(_tutteLattine);
-      if (term) base = base.filter(b =>
-        b.nome.toLowerCase().includes(term) ||
-        b.birrificio.toLowerCase().includes(term) ||
-        (b.tipologia && b.tipologia.toLowerCase().includes(term))
-      );
-      _renderLattineFiltrate(base, term);
+      const lista = term
+        ? _tutteLattine.filter(b =>
+            b.nome.toLowerCase().includes(term) ||
+            b.birrificio.toLowerCase().includes(term) ||
+            (b.tipologia && b.tipologia.toLowerCase().includes(term))
+          )
+        : _tutteLattine;
+      _renderLattine(lista, term);
     }
 
-    /* Badge circle (DOM only — no innerHTML for images) */
+    /* Badge circle */
     function buildBadgeCircle(imgUrl, altText) {
       const circle = document.createElement('div');
       circle.className = 'badge-circle';
@@ -316,29 +244,18 @@
     function buildTapCard(spina) {
       const card = document.createElement('div');
       card.className = 'tap-card'; card.dataset.spina = spina.numero_spina;
-
       if (spina.birra) {
         const b = spina.birra;
         card.appendChild(buildBadgeCircle(b.immagine_url, b.tipologia || b.nome));
-
-        const style = document.createElement('div'); style.className = 'beer-style';
-        style.textContent = b.tipologia || b.nome; card.appendChild(style);
-
-        const name = document.createElement('div'); name.className = 'beer-name';
-        name.textContent = b.nome; card.appendChild(name);
-
-        const brew = document.createElement('div'); brew.className = 'beer-brewery';
-        brew.textContent = b.birrificio; card.appendChild(brew);
-
-        const abv = document.createElement('div'); abv.className = 'abv-text';
-        abv.textContent = b.gradazione_alcolica + '% vol'; card.appendChild(abv);
-
+        const style = document.createElement('div'); style.className = 'beer-style'; style.textContent = b.tipologia || b.nome; card.appendChild(style);
+        const name  = document.createElement('div'); name.className  = 'beer-name';  name.textContent  = b.nome;        card.appendChild(name);
+        const brew  = document.createElement('div'); brew.className  = 'beer-brewery'; brew.textContent = b.birrificio;  card.appendChild(brew);
+        const abv   = document.createElement('div'); abv.className   = 'abv-text';   abv.textContent   = b.gradazione_alcolica + '% vol'; card.appendChild(abv);
         const pg = document.createElement('div'); pg.className = 'price-grid';
         pg.innerHTML =
           '<div class="price-box"><div class="price-label">Piccola</div><div class="price-value">€' + b.prezzo_piccola.toFixed(2) + '</div></div>' +
           '<div class="price-box"><div class="price-label">Media</div><div class="price-value">€' + b.prezzo_media.toFixed(2) + '</div></div>';
         card.appendChild(pg);
-
       } else {
         card.appendChild(buildBadgeCircle(null, 'Vuota'));
         const et = document.createElement('div'); et.className = 'empty-tap';
@@ -357,12 +274,10 @@
     function renderLattine(lattine) {
       _tutteLattine = lattine || [];
       document.getElementById('lattineSearch').value = '';
-      _activeCat = 'tutte';
-      document.querySelectorAll('.subcat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === 'tutte'));
-      _renderLattineFiltrate(_tutteLattine);
+      _renderLattine(_tutteLattine);
     }
 
-    function _renderLattineFiltrate(lista, term) {
+    function _renderLattine(lista, term) {
       const c   = document.getElementById('lattineContainer');
       const cnt = document.getElementById('lattineCount');
       if (!lista || !lista.length) {
@@ -376,13 +291,23 @@
         row.appendChild(buildCanThumb(b.immagine_url));
 
         const info = document.createElement('div'); info.className = 'lattina-info';
-        const sty  = document.createElement('div'); sty.className  = 'lattina-style'; sty.textContent = b.tipologia || b.nome;
-        const nm   = document.createElement('div'); nm.className   = 'lattina-name';  nm.textContent  = b.nome;
-        const mt   = document.createElement('div'); mt.className   = 'lattina-meta';
+        const sty  = document.createElement('div'); sty.className = 'lattina-style'; sty.textContent = b.tipologia || b.nome;
+        const nm   = document.createElement('div'); nm.className  = 'lattina-name';  nm.textContent  = b.nome;
+        const mt   = document.createElement('div'); mt.className  = 'lattina-meta';
         mt.innerHTML = b.birrificio + '<span class="sep">&#183;</span>' + b.gradazione_alcolica + '% vol';
         info.appendChild(sty); info.appendChild(nm); info.appendChild(mt);
-        if (b.gluten_free) {
-          const gf = document.createElement('div'); gf.className = 'gf-badge'; gf.textContent = 'Gluten Free'; info.appendChild(gf);
+
+        // Badge gluten free e analcolico
+        const hasBadges = b.gluten_free || b.analcolico;
+        if (hasBadges) {
+          const badgesRow = document.createElement('div'); badgesRow.className = 'badges-row';
+          if (b.gluten_free) {
+            const gf = document.createElement('span'); gf.className = 'gf-badge'; gf.textContent = 'Gluten Free'; badgesRow.appendChild(gf);
+          }
+          if (b.analcolico) {
+            const an = document.createElement('span'); an.className = 'analcolico-badge'; an.textContent = 'Analcolico'; badgesRow.appendChild(an);
+          }
+          info.appendChild(badgesRow);
         }
         row.appendChild(info);
 
