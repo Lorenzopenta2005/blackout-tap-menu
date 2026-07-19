@@ -86,7 +86,7 @@ const SEED_BIRRE = [
   { id: 60, formato: 'lattina',  nome: 'TENNETS',      birrificio: 'WELLPARK BREWERY',         tipologia: 'Strong Lager',    gradazione_alcolica: 9.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 4.50, disponibile: true, gluten_free: false, immagine_url: '/images/tennets.png' },
   { id: 61, formato: 'lattina',  nome: 'AMARANTA',      birrificio: 'ORSO VERDE',         tipologia: 'Bock',    gradazione_alcolica: 6.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 7.00, disponibile: true, gluten_free: false, immagine_url: '/images/amaranta.png' },
   { id: 62, formato: 'lattina',  nome: 'VLAANDER',      birrificio: 'ORSO VERDE',         tipologia: 'Tripel',    gradazione_alcolica: 8.1, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 7.00, disponibile: true, gluten_free: false, immagine_url: '/images/vlaander.png' },
-  { id: 62, formato: 'lattina',  nome: 'CA**O GUARDI',      birrificio: 'BREWFIST',         tipologia: 'Blond Ale',    gradazione_alcolica: 0.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: true, immagine_url: '/images/cazzoguardi.png' },
+  { id: 63, formato: 'lattina',  nome: 'CA**O GUARDI',      birrificio: 'BREWFIST',         tipologia: 'Blond Ale',    gradazione_alcolica: 0.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: true, immagine_url: '/images/cazzoguardi.png' },
   
 
 
