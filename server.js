@@ -52,6 +52,19 @@ const SEED_BIRRE = [
   { id: 37, formato: 'spina',   nome: 'FLEUR SOFRONIA',birrificio: 'MC-77',               tipologia: 'BLANCHE',      gradazione_alcolica: 5.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/sofronia.png' },
   { id: 38, formato: 'spina',   nome: 'GHISA',         birrificio: 'LAMBRATE',            tipologia: 'STOUT',        gradazione_alcolica: 5.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ghisa.png' },
   { id: 39, formato: 'spina',   nome: 'SESSION TRIPEL',birrificio: 'BANDIGA',             tipologia: 'Belgian Blond Ale',         gradazione_alcolica: 5.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/tripel-bandiga.png' },
+  { id: 75, formato: 'spina',   nome: 'IPACONDA'      ,birrificio: 'EDIT',                tipologia: 'American IPA',         gradazione_alcolica: 6.6, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ipaconda.png' },
+
+  
+ 
+ 
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //BIRRE SPINE
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // BIRRE LATTINA
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  
+  
   { id: 22, formato: 'lattina', nome: 'ZIP',           birrificio: 'BREWFIST',            tipologia: 'Italian Pils', gradazione_alcolica: 5.1, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: true,  analcolico: false, immagine_url: '/images/brewort-zip.png' },
   { id: 23, formato: 'lattina', nome: 'BUNDES',        birrificio: 'HAMMER',              tipologia: 'Pils',         gradazione_alcolica: 5.2, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: false, immagine_url: '/images/bundes.png' },
   { id: 24, formato: 'lattina', nome: 'HIRSCH',        birrificio: 'HAMMER',              tipologia: 'Gose',         gradazione_alcolica: 4.5, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true,  gluten_free: false, immagine_url: '/images/hirsch.png' },
@@ -87,6 +100,20 @@ const SEED_BIRRE = [
   { id: 61, formato: 'lattina',  nome: 'AMARANTA',      birrificio: 'ORSO VERDE',         tipologia: 'Bock',    gradazione_alcolica: 6.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 7.00, disponibile: true, gluten_free: false, immagine_url: '/images/amaranta.png' },
   { id: 62, formato: 'lattina',  nome: 'VLAANDER',      birrificio: 'ORSO VERDE',         tipologia: 'Tripel',    gradazione_alcolica: 8.1, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 7.00, disponibile: true, gluten_free: false, immagine_url: '/images/vlaander.png' },
   { id: 63, formato: 'lattina',  nome: 'CA**O GUARDI',      birrificio: 'BREWFIST',         tipologia: 'Blond Ale',    gradazione_alcolica: 0.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: true, immagine_url: '/images/cazzoguardi.png' },
+  { id: 64, formato: 'lattina',  nome: 'FUMANT',      birrificio: 'BIRRIFICIO DEI CASTELLI',         tipologia: 'Rauch',    gradazione_alcolica: 5.2, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/fumant.png' },
+  { id: 65, formato: 'lattina',  nome: 'ARIES',      birrificio: 'BIRRIFICIO DEI CASTELLI',         tipologia: 'Bock',    gradazione_alcolica: 6.5, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/aries.png' },
+  { id: 66, formato: 'lattina',  nome: 'BLOEMENBIER',      birrificio: 'DE PROEFBROUWERIJ',         tipologia: 'Strong Ale',    gradazione_alcolica: 7.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/bloemenbier.png' },
+  { id: 67, formato: 'lattina',  nome: 'FALL GUY',      birrificio: 'TEMPEST',         tipologia: 'Stout',    gradazione_alcolica: 5.6, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/fallguy.png' },
+  { id: 68, formato: 'lattina',  nome: 'PRIMA NOTTE',      birrificio: 'CLATERNA',         tipologia: 'Imperial Stout',    gradazione_alcolica: 13.5, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/primanotte.png' },
+  { id: 69, formato: 'lattina',  nome: 'APEX',      birrificio: 'WICKLOW WOLF',         tipologia: 'Stout',    gradazione_alcolica: 6.5, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/wolf.png' },
+  { id: 70, formato: 'lattina',  nome: 'I VE HAD WORSE',      birrificio: 'BUSA DEI BRIGANTI',         tipologia: 'Stout',    gradazione_alcolica: 5.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/worse.png' },
+  { id: 71, formato: 'lattina',  nome: 'NO SMOKING',      birrificio: 'RETORTO',         tipologia: 'Porter',    gradazione_alcolica: 5.2, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/nosmoking.png' },
+  { id: 72, formato: 'lattina',  nome: 'FARO',      birrificio: 'LINDEMANS',         tipologia: 'Lambic',    gradazione_alcolica: 4.5, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/faro.png' },
+  { id: 73, formato: 'lattina',  nome: 'KRIEK',      birrificio: 'LINDEMANS',         tipologia: 'Fruit Beer',    gradazione_alcolica: 3.5, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/kriek.png' },
+  { id: 74, formato: 'lattina',  nome: 'BUSH DE NOËL',      birrificio: 'DUBUISSON',         tipologia: 'Belgian Strong Ale',    gradazione_alcolica: 12.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 6.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/noel.png' },
+  { id: 76, formato: 'lattina',  nome: 'SCARBOROUGH FAIR IPA',      birrificio: 'WOLD TOP BREWERY',         tipologia: 'English Style IPA',    gradazione_alcolica: 6.0, prezzo_piccola: null, prezzo_media: null, prezzo_unico: 7.00, disponibile: true, gluten_free: false, analcolico: false, immagine_url: '/images/woldtop.png' },
+  
+
   
 
 
