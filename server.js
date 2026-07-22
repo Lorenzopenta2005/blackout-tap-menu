@@ -34,7 +34,7 @@ const SEED_BIRRE = [
   { id: 8,  formato: 'spina',   nome: 'BERRY DROP',    birrificio: 'VETRA',               tipologia: 'Fruit Beer',   gradazione_alcolica: 4.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/berrydrop-vetra.png' },
   { id: 9,  formato: 'spina',   nome: 'SAN LORENZO',   birrificio: 'MC-77',               tipologia: 'Blanche',      gradazione_alcolica: 5.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/sanlorenzo.png' },
   { id: 10, formato: 'spina',   nome: 'BOCKBIER',      birrificio: 'MÖNCHSHOF',           tipologia: 'Bock',         gradazione_alcolica: 6.9, prezzo_piccola: 3.50, prezzo_media: 5.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/bockbier.png' },
-  { id: 11, formato: 'spina',   nome: 'ITALIAN PILS',  birrificio: 'BANDIGA',             tipologia: 'Italian Pils', gradazione_alcolica: 5.0, prezzo_piccola: 4.00, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/italian-pils-bandiga.png' },
+  { id: 11, formato: 'spina',   nome: 'ITALIAN PILS',  birrificio: 'BANDIGA',             tipologia: 'Italian Pils', gradazione_alcolica: 5.0, prezzo_piccola: 3.00, prezzo_media: 4.50, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/italian-pils-bandiga.png' },
   { id: 12, formato: 'spina',   nome: 'ZHULKA',        birrificio: 'MUTTNIK',             tipologia: 'Imperial IPA', gradazione_alcolica: 8.0, prezzo_piccola: 4.50, prezzo_media: 6.50, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/zhulka-muttnik.png' },
   { id: 13, formato: 'spina',   nome: 'MINI',          birrificio: 'HAMMER',              tipologia: 'Session IPA',  gradazione_alcolica: 4.2, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/session-ipa-mini.png' },
   { id: 14, formato: 'spina',   nome: 'DUNKELBOCK',    birrificio: 'FALKENTRUM',          tipologia: 'Stark bier',   gradazione_alcolica: 7.0, prezzo_piccola: 3.50, prezzo_media: 5.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/dunkelbock.png' },
@@ -53,6 +53,7 @@ const SEED_BIRRE = [
   { id: 38, formato: 'spina',   nome: 'GHISA',         birrificio: 'LAMBRATE',            tipologia: 'STOUT',        gradazione_alcolica: 5.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ghisa.png' },
   { id: 39, formato: 'spina',   nome: 'SESSION TRIPEL',birrificio: 'BANDIGA',             tipologia: 'Belgian Blond Ale',         gradazione_alcolica: 5.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/tripel-bandiga.png' },
   { id: 75, formato: 'spina',   nome: 'IPACONDA'      ,birrificio: 'EDIT',                tipologia: 'American IPA',         gradazione_alcolica: 6.6, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ipaconda.png' },
+  
 
   
  
