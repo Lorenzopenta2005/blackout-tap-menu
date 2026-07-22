@@ -53,7 +53,7 @@ const SEED_BIRRE = [
   { id: 38, formato: 'spina',   nome: 'GHISA',         birrificio: 'LAMBRATE',            tipologia: 'STOUT',        gradazione_alcolica: 5.0, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ghisa.png' },
   { id: 39, formato: 'spina',   nome: 'SESSION TRIPEL',birrificio: 'BANDIGA',             tipologia: 'Belgian Blond Ale',         gradazione_alcolica: 5.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/tripel-bandiga.png' },
   { id: 75, formato: 'spina',   nome: 'IPACONDA'      ,birrificio: 'EDIT',                tipologia: 'American IPA',         gradazione_alcolica: 6.6, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true, gluten_free: false, immagine_url: '/images/ipaconda.png' },
-  
+  { id: 77, formato: 'spina', nome: 'SESSION IPA (GLUTEN FREE)',   birrificio: 'BANDIGA',             tipologia: 'Session IPA', gradazione_alcolica: 4.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: true, immagine_url: '/images/sessionipa.png' },
 
   
  
