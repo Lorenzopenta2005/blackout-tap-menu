@@ -62,7 +62,7 @@ const SEED_BIRRE = [
   { id: 83, formato: 'spina', nome: 'LATEX PIÙ',   birrificio: 'RETORTO',             tipologia: 'Blanche', gradazione_alcolica: 4.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/latex.png' },
   { id: 84, formato: 'spina', nome: 'JACOBATOR',   birrificio: 'JACOB',             tipologia: 'Doppelbock', gradazione_alcolica: 7.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/jacobator.png' }, 
   { id: 85, formato: 'spina', nome: 'GOGO (Gluten Free)',   birrificio: 'EDIT',             tipologia: 'Asian Blanche ', gradazione_alcolica: 4.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/gogo.png' },
-  { id: 86, formato: 'spina', nome: 'IRISH STOUT',   birrificio: 'OHARAS',             tipologia: 'Irish Stout ', gradazione_alcolica: 4.3, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/oharas.png' },
+  { id: 86, formato: 'spina', nome: 'IRISH STOUT',   birrificio: 'OHARAS',             tipologia: 'Irish Stout ', gradazione_alcolica: 4.3, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/ohara.png' },
   
 
   
@@ -142,7 +142,7 @@ const SEED_SPINE = [
 ];
 
 // =============================================================================
-// INIT DB — sincronizza il catalogo ad ogni avvio
+// INIT DB — verifica connessione e crea spine default se vuote
 // =============================================================================
 
 async function initDB() {
@@ -153,20 +153,24 @@ async function initDB() {
     process.exit(1);
   }
 
-  // Upsert birre — aggiunge le nuove, aggiorna le esistenti
+  // Upsert birre del SEED — aggiunge quelle mancanti, aggiorna le esistenti
+  // NON elimina birre aggiunte dall'admin tramite il pannello
   const { error: errBirre } = await supabase
     .from('birre')
     .upsert(SEED_BIRRE, { onConflict: 'id', ignoreDuplicates: false });
-  if (errBirre) { console.error('[DB] Upsert birre fallito:', errBirre.message); process.exit(1); }
+  if (errBirre) {
+    console.error('[DB] Upsert birre fallito:', errBirre.message);
+    process.exit(1);
+  }
+  logger.info(`Catalogo sincronizzato: ${SEED_BIRRE.length} birre dal seed.`);
 
-  // Upsert spine — non sovrascrive birra_id già impostato dall'admin
-  const { error: errSpine } = await supabase
-    .from('spine')
-    .upsert(SEED_SPINE, { onConflict: 'numero_spina', ignoreDuplicates: true });
-  if (errSpine) { console.error('[DB] Upsert spine fallito:', errSpine.message); process.exit(1); }
+  // Spine — inserisce solo se vuote (non sovrascrive cambio fusto admin)
+  const { data: spineEsistenti } = await supabase.from('spine').select('numero_spina').limit(1);
+  if (!spineEsistenti || spineEsistenti.length === 0) {
+    await supabase.from('spine').insert(SEED_SPINE);
+    logger.info('Spine create (primo avvio).');
+  }
 
-  logger.info(`Catalogo sincronizzato: ${SEED_BIRRE.length} birre.`);
-  logger.info('Spine sincronizzate.');
   logger.info('Database pronto.');
 }
 
@@ -232,6 +236,68 @@ const db = {
     const { data, error } = await supabase
       .from('birre').update({ immagine_url: url || null }).eq('id', id).select().single();
     if (error) throw new Error(error.message);
+    return data;
+  },
+
+  // ── CRUD catalogo ────────────────────────────────────────────────────────
+
+  creaBirra: async (payload) => {
+    const { nome, birrificio, tipologia, gradazione_alcolica, formato,
+            prezzo_piccola, prezzo_media, prezzo_unico,
+            gluten_free, analcolico, disponibile, immagine_url } = payload;
+    if (!nome || !birrificio || !formato)
+      throw new Error('nome, birrificio e formato sono obbligatori');
+    if (!['spina','lattina'].includes(formato))
+      throw new Error('formato deve essere "spina" o "lattina"');
+    const { data, error } = await supabase
+      .from('birre')
+      .insert({
+        // id omesso — generato automaticamente da Supabase (SERIAL)
+        nome, birrificio, tipologia: tipologia || null,
+        gradazione_alcolica: parseFloat(gradazione_alcolica) || 0,
+        formato,
+        prezzo_piccola: prezzo_piccola != null && prezzo_piccola !== '' ? parseFloat(prezzo_piccola) : null,
+        prezzo_media:   prezzo_media   != null && prezzo_media   !== '' ? parseFloat(prezzo_media)   : null,
+        prezzo_unico:   prezzo_unico   != null && prezzo_unico   !== '' ? parseFloat(prezzo_unico)   : null,
+        gluten_free:    !!gluten_free,
+        analcolico:     !!analcolico,
+        disponibile:    disponibile !== false,
+        immagine_url:   immagine_url || null,
+      })
+      .select().single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  aggiornaBirra: async (id, payload) => {
+    const allowed = ['nome','birrificio','tipologia','gradazione_alcolica',
+                     'prezzo_piccola','prezzo_media','prezzo_unico',
+                     'gluten_free','analcolico','disponibile','immagine_url','formato'];
+    const patch = {};
+    for (const k of allowed) {
+      if (payload[k] !== undefined) patch[k] = payload[k];
+    }
+    if (!Object.keys(patch).length) throw new Error('Nessun campo da aggiornare');
+    const { data, error } = await supabase
+      .from('birre').update(patch).eq('id', id).select().single();
+    if (error) throw new Error(error.message);
+    return data;
+  },
+
+  eliminaBirra: async (id) => {
+    // Svuota le spine che usano questa birra prima di eliminarla
+    await supabase.from('spine').update({ birra_id: null }).eq('birra_id', id);
+    const { error } = await supabase.from('birre').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+  },
+
+  toggleDisponibilita: async (id) => {
+    const { data: birra, error: e1 } = await supabase
+      .from('birre').select('id, nome, disponibile').eq('id', id).single();
+    if (e1 || !birra) throw new Error('Birra non trovata');
+    const { data, error: e2 } = await supabase
+      .from('birre').update({ disponibile: !birra.disponibile }).eq('id', id).select().single();
+    if (e2) throw new Error(e2.message);
     return data;
   },
 };
@@ -339,6 +405,58 @@ app.post('/api/admin/immagine', requireAdmin, async (req, res) => {
     logger.info(`Immagine aggiornata: id=${birra_id}`);
     res.json({ success: true, data: aggiornata });
   } catch (err) { logger.error('POST /api/admin/immagine', err); res.status(400).json({ success: false, message: err.message }); }
+});
+
+// ── CRUD catalogo birre ──────────────────────────────────────────────────────
+
+// Crea nuova birra
+app.post('/api/admin/birre', requireAdmin, async (req, res) => {
+  try {
+    const nuova = await db.creaBirra(req.body);
+    // Broadcast aggiornato
+    if (nuova.formato === 'lattina') io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
+    logger.info(`Birra creata: ${nuova.nome} (id=${nuova.id})`);
+    res.status(201).json({ success: true, data: nuova });
+  } catch (err) { logger.error('POST /api/admin/birre', err); res.status(400).json({ success: false, message: err.message }); }
+});
+
+// Aggiorna birra esistente
+app.put('/api/admin/birre/:id', requireAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.status(400).json({ success: false, message: 'ID non valido' });
+    const aggiornata = await db.aggiornaBirra(id, req.body);
+    if (aggiornata.formato === 'spina') io.emit('menu_spine_aggiornato', await db.getSpine());
+    else io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
+    logger.info(`Birra aggiornata: id=${id}`);
+    res.json({ success: true, data: aggiornata });
+  } catch (err) { logger.error('PUT /api/admin/birre/:id', err); res.status(400).json({ success: false, message: err.message }); }
+});
+
+// Elimina birra
+app.delete('/api/admin/birre/:id', requireAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.status(400).json({ success: false, message: 'ID non valido' });
+    await db.eliminaBirra(id);
+    io.emit('menu_spine_aggiornato', await db.getSpine());
+    io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
+    logger.info(`Birra eliminata: id=${id}`);
+    res.json({ success: true });
+  } catch (err) { logger.error('DELETE /api/admin/birre/:id', err); res.status(400).json({ success: false, message: err.message }); }
+});
+
+// Toggle disponibile (funziona sia per spina che lattina)
+app.post('/api/admin/birre/:id/toggle', requireAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) return res.status(400).json({ success: false, message: 'ID non valido' });
+    const aggiornata = await db.toggleDisponibilita(id);
+    if (aggiornata.formato === 'spina') io.emit('menu_spine_aggiornato', await db.getSpine());
+    else io.emit('menu_lattine_aggiornato', await db.getLattineDisponibili());
+    logger.info(`Toggle disponibilità: id=${id} → ${aggiornata.disponibile}`);
+    res.json({ success: true, data: aggiornata });
+  } catch (err) { logger.error('POST /api/admin/birre/:id/toggle', err); res.status(400).json({ success: false, message: err.message }); }
 });
 
 // =============================================================================
