@@ -63,7 +63,7 @@ const SEED_BIRRE = [
   { id: 84, formato: 'spina', nome: 'JACOBATOR',   birrificio: 'JACOB',             tipologia: 'Doppelbock', gradazione_alcolica: 7.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/jacobator.png' }, 
   { id: 85, formato: 'spina', nome: 'GOGO (Gluten Free)',   birrificio: 'EDIT',             tipologia: 'Asian Blanche ', gradazione_alcolica: 4.5, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/gogo.png' },
   { id: 86, formato: 'spina', nome: 'IRISH STOUT',   birrificio: 'OHARAS',             tipologia: 'Irish Stout ', gradazione_alcolica: 4.3, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/ohara.png' },
-  
+  { id: 87, formato: 'spina', nome: 'CINCININ',   birrificio: 'LAMBRATE',             tipologia: 'Micro IPA ', gradazione_alcolica: 2.8, prezzo_piccola: 3.50, prezzo_media: 6.00, prezzo_unico: null, disponibile: true,  gluten_free: false, immagine_url: '/images/cincinin.png' },
 
   
  
